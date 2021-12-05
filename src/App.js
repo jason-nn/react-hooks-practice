@@ -46,6 +46,8 @@ export default function App() {
 
   const inputRef = useRef();
 
+  const helloRef = useRef(() => console.log('hello'));
+
   return (
     <>
       <div>
@@ -119,6 +121,7 @@ export default function App() {
         <button
           onClick={() => {
             inputRef.current.focus();
+            helloRef.current();
           }}
         >
           focus
