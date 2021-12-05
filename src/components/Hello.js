@@ -12,5 +12,5 @@ export default function Hello() {
 
   console.log('hello renders: ', renders.current++);
 
-  return <>Hello</>;
+  return <h1>Hello</h1>;
 }

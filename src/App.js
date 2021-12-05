@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import useForm from './hooks/useForm';
 import useFetch from './hooks/useFetch';
 import Hello from './components/Hello';
+import useMeasure from './hooks/useMeasure';
 
 export default function App() {
   const [{ count, count2 }, setCount] = useState({ count: 10, count2: 20 });
@@ -47,6 +48,14 @@ export default function App() {
   const inputRef = useRef();
 
   const helloRef = useRef(() => console.log('hello'));
+
+  // const [dataSpanDetails, setDataSpanDetails] = useState({});
+
+  // useLayoutEffect(() => {
+  //   setDataSpanDetails(dataSpanRef.current.getBoundingClientRect());
+  // }, [data]);
+
+  const [dataSpanDetails, dataSpanRef] = useMeasure([data]);
 
   return (
     <>
@@ -110,11 +119,13 @@ export default function App() {
       </div>
 
       <div>
-        <div>{loading ? 'loading...' : data}</div>
+        <span ref={dataSpanRef}>{loading ? 'loading...' : data}</span>
 
         <div>{triviaNum}</div>
 
         <button onClick={() => setTriviaNum(triviaNum + 1)}>+</button>
+
+        <pre>{JSON.stringify(dataSpanDetails, null, 2)}</pre>
       </div>
 
       <div>
