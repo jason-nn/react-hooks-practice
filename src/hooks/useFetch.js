@@ -16,7 +16,7 @@ export default function useFetch(url) {
     fetch(url)
       .then((response) => response.text())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (isCurrent.current) {
           setState({ data: data, loading: false });
         }
